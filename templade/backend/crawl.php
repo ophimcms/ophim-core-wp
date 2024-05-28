@@ -6,14 +6,14 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
     <nav class="nav-tab-wrapper">
         <a href="?page=ofim-manager-crawl" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Thủ công</a>
         <a href="?page=ofim-manager-crawl&tab=schedule" class="nav-tab <?php if($tab==='schedule'):?>nav-tab-active<?php endif; ?>">Tự động</a>
-        <a href="?page=ofim-manager-crawl&tab=about" class="nav-tab <?php if($tab==='about'):?>nav-tab-active<?php endif; ?>">Giới thiệu</a>
     </nav>
     <div class="tab-content">
         <?php
+
+
         switch($tab) :
             case 'schedule':
                 $crawl_ophim_settings = json_decode(get_option(CRAWL_OPHIM_OPTION_SETTINGS, []));
-                $schedule_log = '';
                 ?>
 
                 <div class="crawl_page">
@@ -25,14 +25,14 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                                     Thời gian thực hiện (<a href="https://crontab.guru/" target="_blank">Xem thêm</a>)
                                 </p>
                                 <p>
-                                    Cấu hình crontab: <code><i style="color:blueviolet">*/10 * * * *</i> cd <i style="color:blueviolet">/path/to/</i>wp-content/plugins/crawl_ophim_halimthemes/ && php -q schedule.php <i style="color:blueviolet">{secret_key}</i></code>
+                                    Cấu hình crontab: <code><i style="color:blueviolet">*/10 * * * *</i> cd <i style="color:blueviolet">/path/to/</i>wp-content/plugins/ophim-core/ && php -q schedule.php <i style="color:blueviolet">{secret_key}</i></code>
                                 </p>
                                 <p>
                                     Ví dụ:
                                     <br />
-                                    Mỗi 5 phút: <code>*/5 * * * * cd <?php echo CRAWL_OPHIM_PATH; ?> && php -q schedule.php <i style="color:blueviolet"><?php echo get_option(CRAWL_OPHIM_OPTION_SECRET_KEY, ''); ?></i></code>
+                                    Mỗi 5 phút: <code>*/5 * * * * cd <?php echo OFIM_PLUGIN_PATCH; ?> && php -q schedule.php <i style="color:blueviolet"><?php echo get_option(CRAWL_OPHIM_OPTION_SECRET_KEY, ''); ?></i></code>
                                     <br />
-                                    Mỗi 10 phút: <code>*/10 * * * * cd <?php echo CRAWL_OPHIM_PATH; ?> && php -q schedule.php <i style="color:blueviolet"><?php echo get_option(CRAWL_OPHIM_OPTION_SECRET_KEY, ''); ?></i></code>
+                                    Mỗi 10 phút: <code>*/10 * * * * cd <?php echo OFIM_PLUGIN_PATCH; ?> && php -q schedule.php <i style="color:blueviolet"><?php echo get_option(CRAWL_OPHIM_OPTION_SECRET_KEY, ''); ?></i></code>
                                 </p>
                             </div>
                         </div>
@@ -73,7 +73,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
 
                             <div class="notice notice-success">
                                 <p>File logs: <code style="color:brown"><?php echo $schedule_log['log_filename'];?></code></p>
-                                <textarea rows="10" id="schedule_log" class="" readonly><?php echo $schedule_log['log_data'];?></textarea>
+                                <textarea style="width: 100%" rows="10" id="schedule_log" class="" readonly><?php echo $schedule_log['log_data'];?></textarea>
                             </div>
 
                         </div>
@@ -137,6 +137,10 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                     <div class="crawl_page">
                         Page Crawl: From <input type="number" name="page_from" value="">
                         To <input type="number" name="page_to" value="">
+                    </div>
+
+                    <div class="crawl_page">
+                        Url API <input type="text" id="url_api" value="" style="width: 70%">
                         <div id="get_list_movies" class="primary">Get List Movies</div>
                     </div>
 
@@ -149,21 +153,22 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                         <div style="display: none" id="msg" class="notice notice-success">
                             <p id="msg_text"></p>
                         </div>
-                        <textarea rows="10" id="result_list_movies" class="list_movies"></textarea>
+                        <textarea style="width: 100%" rows="10" id="result_list_movies" class="list_movies"></textarea>
                         <div id="roll_movies" class="roll">Trộn Link</div>
                         <div id="crawl_movies" class="primary">Crawl Movies</div>
 
                         <div style="display: none;" id="result_success" class="notice notice-success">
                             <p>Crawl Thành Công</p>
-                            <textarea rows="10" id="list_crawl_success"></textarea>
+                            <textarea style="width: 100%" rows="10" id="list_crawl_success"></textarea>
                         </div>
 
                         <div style="display: none;" id="result_error" class="notice notice-error">
                             <p>Crawl Lỗi</p>
-                            <textarea rows="10" id="list_crawl_error"></textarea>
+                            <textarea style="width: 100%" rows="10" id="list_crawl_error"></textarea>
                         </div>
                     </div>
                 </div>
+
 
                 <?php
                 break;

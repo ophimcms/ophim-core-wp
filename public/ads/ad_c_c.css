@@ -1,0 +1,207 @@
+img{
+	max-width:100%;
+}
+@keyframes blink {
+    from {
+        color: #00603a;
+        background: #f2f2f2
+    }
+
+    to {
+        color: #f2f2f2;
+        background: #00603a
+    }
+}
+
+@-webkit-keyframes blink {
+    from {
+        color: #00603a;
+        background: #f2f2f2
+    }
+
+    to {
+        color: #f2f2f2;
+        background: #00603a
+    }
+}
+.underplayer_btn{
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	margin: 5px auto;
+}
+.underplayer_btn a{
+	border-radius: 5px;
+	padding: 2px 5px;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 12px;
+	margin: 2px;
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	direction: rtl;
+	text-align: left;
+}
+@media (max-width:400px) {
+	.underplayer_btn a{
+		font-size: 12px;
+		max-width: 20%;
+	}
+}
+#xs-addd0 a{
+	padding: 5px 8px;
+    color: #00603a;
+    background: #f2f2f2;
+    display: inline-block;
+	font-size:14px;
+	margin-bottom:3px;
+	text-decoration: none;
+}
+.blink_me {
+    animation-duration: 800ms;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation: blink 800ms infinite;
+}
+#top_addd {
+    margin: 0 auto;
+}
+#top_addd img{margin-bottom:3px}
+#top_addd img,
+#footer_fixed_ads img,
+.under-player img
+{
+	max-height:60px;
+}
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 999999;
+    cursor: pointer;
+}
+#overlay .overlay_content{
+    position:relative;
+    height:100%;
+}
+.overlay_block{
+    display:inline-block;
+    position:relative;
+}
+#overlay .overlay_content .overlay_wrapper{
+    width:600px;
+    height:auto;
+    position:relative;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    text-align:center;
+}
+#overlay .overlay_content .cls_ov{
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: -30px;
+    right: 0px;
+    z-index: 999999;
+    font-size: 14px;
+    padding: 4px 10px;
+    border: 1px solid #aeaeae;
+    background-color: rgba(0,0,0,0.7);
+}
+#overlay img{
+    position: relative;
+    z-index: 999;
+}
+#top_oddd{
+    margin-bottom: 10px;
+}
+#top_oddd img{
+	margin-bottom:3px;
+}
+#footer_fixed_ads{position:relative;z-index:103}
+.banner-sticky-footer-wrapper{
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
+    z-index:100;
+}
+.banner-sticky-footer-container{
+    position:relative;
+    text-align: center;
+}
+.banner-sticky-footer-ad {
+    position:relative;
+    margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	margin-bottom:3px
+}
+.banner-sticky-footer-ad .ad-sticky-content {
+    width: 100%;
+    background-color: #191919;
+}
+.banner-sticky-footer-ad .ad_close_popup {
+    padding: 1px;
+    position: absolute;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    right: 0px;
+    top: -30px;
+    width:32px;
+    cursor: pointer;
+}
+.banner-flex{
+        position: relative;
+    }
+@media only screen and (min-width: 768px) {
+    
+}
+@media only screen and (max-width: 768px) {
+    #overlay .overlay_content .overlay_wrapper{
+        width:400px;
+        top: 20%;
+        transform: translate(-50%,3%);
+    }
+	#overlay .overlay_content .cls_ov {
+		top: -35px;
+		right: 0px;	
+	}
+}
+@media (max-width: 767px) {
+    .footer-logo-film{width:100%}
+    .footer-contact{width: 100%;
+                    clear: both;
+                    padding-top: 20px;}
+    .banner-sticky-footer-ad{
+        width:100% !important;
+    }
+    .banner-flex{
+        display: inline-block;
+    }
+}
+@media (max-width: 480px) {
+    .banner-sticky-footer-ad .ad-sticky-content{
+        max-width: 320px;
+    }
+}
+@media only screen and (max-width: 400px) {
+    #overlay .overlay_content .overlay_wrapper{
+        width:310px;
+        top: 20%;
+        transform: translate(-50%,3%);
+    }
+}

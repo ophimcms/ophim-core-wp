@@ -8,57 +8,62 @@ class oFim_Backend
 
     public function __construct()
     {
-        //echo __METHOD__;
+        (new oFim_Permalink())->register();
         if (isset($_GET['page'])) $this->_page = $_GET['page'];
-        add_action('admin_menu', array($this,'menus'));
+        add_action('admin_menu', array($this, 'menus'));
+        if ($_GET['page'] == 'ofim-manager-crawl' || $_GET['page'] == 'ofim-manager-css-js') {
+            add_action('admin_enqueue_scripts', array($this, 'css'));
+        }
+        add_action('admin_enqueue_scripts', array($this, 'codemirror_enqueue_scripts'));
     }
 
+
+    public function codemirror_enqueue_scripts($hook)
+    {
+        $cm_settings['codeEditor'] = wp_enqueue_code_editor(array('type' => 'text/css'));
+        wp_localize_script('jquery', 'cm_settings', $cm_settings);
+    }
+
+    public function css()
+    {
+        wp_enqueue_style('admin_css', OFIM_CSS_URL . '/style.css', false, '');
+    }
 
     public function menus()
     {
 
-        add_menu_page('OFim', 'OFim', 'manage_options', $this->_menuSlug, array($this, 'dispatch_function'), '', 3);
-
-        add_submenu_page($this->_menuSlug,'Tất cả phim','Tất cả phim','manage_options',
-            $this->_menuSlug. '-allfim',array($this,'dispatch_function'));
-
-        add_submenu_page($this->_menuSlug,'Thêm mới','Thêm mới','manage_options',
-            $this->_menuSlug. '-addfim',array($this,'dispatch_function'));
-
-        add_submenu_page($this->_menuSlug,'Thể loại','Thể loại','manage_options',
-            $this->_menuSlug. '-theloai',array($this,'dispatch_function'));
-
-        add_submenu_page($this->_menuSlug,'Tag','Tag','manage_options',
-            $this->_menuSlug. '-tag',array($this,'dispatch_function'));
-
-        add_submenu_page($this->_menuSlug,'Actors','Actors','manage_options',
-            $this->_menuSlug. '-actors',array($this,'dispatch_function'));
-
-        add_submenu_page($this->_menuSlug,'Directors','Directors','manage_options',
-            $this->_menuSlug. '-directors',array($this,'dispatch_function'));
-
-        add_submenu_page($this->_menuSlug,'Release','Release','manage_options',
-            $this->_menuSlug. '-release',array($this,'dispatch_function'));
-
-        add_submenu_page($this->_menuSlug,'Crawl','Crawl','manage_options',
-            $this->_menuSlug. '-crawl',array($this,'dispatch_function'));
+        add_menu_page('OFim', 'Cài đặt oPhim', 'manage_options', $this->_menuSlug, array($this, 'dispatch_function'), '', 3);
+        add_submenu_page($this->_menuSlug, 'Crawl', 'Crawl', 'manage_options', $this->_menuSlug . '-crawl', array($this, 'dispatch_function'));
+        add_submenu_page($this->_menuSlug, 'CSS&JS', 'JWPlayer', 'manage_options', $this->_menuSlug . '-jwplayer', array($this, 'dispatch_function'));
+        add_submenu_page($this->_menuSlug, 'CSS&JS', 'CSS&JS', 'manage_options', $this->_menuSlug . '-css-js', array($this, 'dispatch_function'));
+        add_submenu_page($this->_menuSlug, 'Ads', 'Ads', 'manage_options', $this->_menuSlug . '-ads', array($this, 'dispatch_function'));
     }
 
     public function dispatch_function()
     {
-        $page= $this->_page;
+        $page = $this->_page;
         global $oController;
-        if($page =='ofim-manager'){
-            $obj = $oController->getController('AdminManager','/backend');
+        if ($page == 'ofim-manager-crawl') {
+            $obj = $oController->getController('AdminCrawl', '/backend');
             $obj->display();
         }
-        if($page =='ofim-manager-allfim'){
-            $obj = $oController->getController('AdminAllFim','/backend');
+        if ($page == 'ofim-manager') {
+            $obj = $oController->getController('AdminManager', '/backend');
             $obj->display();
         }
-        if($page =='ofim-manager-crawl'){
-            $obj = $oController->getController('AdminCrawl','/backend');
+        if ($page == 'ofim-manager-css-js') {
+            $obj = $oController->getController('AdminCSSJS', '/backend');
+            $obj->display();
+        }
+        if ($page == 'ofim-manager-jwplayer') {
+            $obj = $oController->getController('AdminJWPlayer', '/backend');
+            $obj->display();
+        }
+        if ($page == 'ofim-manager-ads') {
+            $obj = $oController->getController('AdminAds', '/backend');
             $obj->display();
         }
     }
+
+
 }

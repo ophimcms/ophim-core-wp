@@ -23,7 +23,7 @@ define('OFIM_VALIDATES_PATCH'  ,OFIM_PLUGIN_PATCH.'validates');
 
 define('OFIM_PREFIX'  ,'OFIM_');
 
-//OFIM
+//OPHIM
 define('API_DOMAIN', 'https://ophim1.com');
 define('CRAWL_OPHIM_OPTION_SETTINGS', 'crawl_ophim_schedule_settings');
 define('CRAWL_OPHIM_OPTION_RUNNING', 'crawl_ophim_schedule_running');
@@ -34,3 +34,6 @@ define('SCHEDULE_CRAWLER_TYPE_INSERT', 1);
 define('SCHEDULE_CRAWLER_TYPE_UPDATE', 2);
 define('SCHEDULE_CRAWLER_TYPE_ERROR', 3);
 define('SCHEDULE_CRAWLER_TYPE_FILTER', 4);
+
+define('CRAWL_OPHIM_PATH', plugin_dir_path(__FILE__));
+define('CRAWL_OPHIM_PATH_SCHEDULE_JSON', CRAWL_OPHIM_PATH . 'schedule.json');

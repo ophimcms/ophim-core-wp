@@ -1,6 +1,6 @@
 <?php
 
-class OFim_AdminManager_Controller{
+class OFim_AdminAds_Controller{
 
     public function __construct(){
 
@@ -8,9 +8,7 @@ class OFim_AdminManager_Controller{
 
     public function display(){
         global $oController;
-        $oController->getView('manager.php','/backend');
-
-
+        $oController->getView('ads.php','/backend');
     }
 
 }
