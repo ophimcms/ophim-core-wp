@@ -35,10 +35,25 @@ function op_the_thumbnail()
     echo '<img src="' . get_post_meta(get_the_ID(), 'ophim_thumb_url', true) . '" style="width:100%" >';
 }
 
+function op_the_logo($stype = '')
+{
+    if (has_custom_logo()): ?>
+        <?php
+        $custom_logo_id = get_theme_mod('custom_logo');
+        $custom_logo_data = wp_get_attachment_image_src($custom_logo_id, 'full');
+        $custom_logo_url = $custom_logo_data[0];
+        ?>
+        <img style="<?= $stype ?>" src="<?php echo esc_url($custom_logo_url); ?>"
+             alt="<?php echo esc_attr(get_bloginfo('name')); ?>"/>
+    <?php else: ?>
+        <h2><?php bloginfo('name'); ?></h2>
+    <?php endif;
+}
+
 
 function op_remove_domain($url)
 {
-    return str_replace(explode("/wp-content/",$url)[0],'',$url);
+    return str_replace(explode("/wp-content/", $url)[0], '', $url);
 }
 
 function op_set_post_view()
@@ -79,9 +94,9 @@ function config_js()
 add_action('wp_footer', 'config_ads');
 function config_ads()
 {
-    if(get_option('ophim_is_ads') == 'on') {
-     include_once OFIM_TEMPLADE_PATCH.'/frontend/ads.php';
-        }
+    if (get_option('ophim_is_ads') == 'on') {
+        include_once OFIM_TEMPLADE_PATCH . '/frontend/ads.php';
+    }
 }
 
 //end include
