@@ -35,7 +35,7 @@ function op_the_thumbnail()
     echo '<img src="' . get_post_meta(get_the_ID(), 'ophim_thumb_url', true) . '" style="width:100%" >';
 }
 
-function op_the_logo($stype = '')
+function op_the_logo($style = '')
 {
     if (has_custom_logo()): ?>
         <?php
@@ -43,7 +43,7 @@ function op_the_logo($stype = '')
         $custom_logo_data = wp_get_attachment_image_src($custom_logo_id, 'full');
         $custom_logo_url = $custom_logo_data[0];
         ?>
-        <img style="<?= $stype ?>" src="<?php echo esc_url($custom_logo_url); ?>"
+        <img style="<?= $style ?>" src="<?php echo esc_url($custom_logo_url); ?>"
              alt="<?php echo esc_attr(get_bloginfo('name')); ?>"/>
     <?php else: ?>
         <h2><?php bloginfo('name'); ?></h2>
