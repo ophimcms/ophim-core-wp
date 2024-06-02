@@ -74,7 +74,7 @@ class oFim_Permalink
     }
 
 
-    public function input( $option_name, $placeholder = '', $type ) {
+    public function input( $option_name, $placeholder, $type ) {
         $slug = get_option( $option_name );
         $value = ( isset( $slug ) ) ? esc_attr( $slug ) : '';
         $utype = ($type) ? '<code>'. $type .'</code>' : null;
