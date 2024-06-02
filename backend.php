@@ -11,8 +11,10 @@ class oFim_Backend
         (new oFim_Permalink())->register();
         if (isset($_GET['page'])) $this->_page = $_GET['page'];
         add_action('admin_menu', array($this, 'menus'));
-        if ($_GET['page'] == 'ofim-manager-crawl' || $_GET['page'] == 'ofim-manager-css-js') {
-            add_action('admin_enqueue_scripts', array($this, 'css'));
+        if (isset($_GET['page'])) {
+            if ($_GET['page'] == 'ofim-manager-crawl' || $_GET['page'] == 'ofim-manager-css-js') {
+                add_action('admin_enqueue_scripts', array($this, 'css'));
+            }
         }
         add_action('admin_enqueue_scripts', array($this, 'codemirror_enqueue_scripts'));
     }
