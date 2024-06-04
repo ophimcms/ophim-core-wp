@@ -98,5 +98,11 @@ function config_ads()
         include_once OFIM_TEMPLADE_PATCH . '/frontend/ads.php';
     }
 }
+function op_jwpayer_js()
+{
+  echo '
+    <script src="'.OFIM_PUBLIC_URL.'/js/jwplayer-8.9.3.js"></script>
+    <script src="'.OFIM_PUBLIC_URL.'/js/hls.min.js"></script>
+    <script src="'.OFIM_PUBLIC_URL.'/js/jwplayer.hlsjs.min.js"></script>';
 
-//end include
+}
