@@ -77,6 +77,7 @@ Copy the code below and paste it into single.php file in the while loop.
 add_action('wp_head', 'config_css');
 function config_css()
 {
+    echo get_option('ophim_include_js_tag_head');
     echo "\n<style type='text/css'>\n";
     echo get_option('ophim_include_css');
     echo "</style>\n";
@@ -86,6 +87,7 @@ function config_css()
 add_action('wp_footer', 'config_js');
 function config_js()
 {
+    echo get_option('ophim_include_js_tag_footer');
     echo "\n<script>\n";
     echo get_option('ophim_include_js', '');
     echo "</script>\n";
