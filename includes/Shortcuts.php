@@ -106,3 +106,12 @@ function op_jwpayer_js()
     <script src="'.OFIM_PUBLIC_URL.'/js/jwplayer.hlsjs.min.js"></script>';
 
 }
+function op_wordpress_logo() {
+?>
+<style type="text/css">
+    body.login div#login h1 a {
+        background-image: url(/wp-content/plugins/ophim-core/public/image/logo-ophim-6.png);
+    }
+</style>
+<?php }
+add_action( 'login_enqueue_scripts', 'op_wordpress_logo' );
