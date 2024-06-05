@@ -61,10 +61,10 @@ add_action('manage_ophim_posts_custom_column', function ($column_key, $post_id) 
         echo op_get_post_view();
     }
     if ($column_key == 'thumb') {
-         op_the_thumbnail();
+        op_the_thumbnail();
     }
     if ($column_key == 'poster') {
-         op_the_poster();
+        op_the_poster();
     }
     if ($column_key == 'featur') {
         $hideA = (1 == op_get_meta('featured_post')) ? 'style="display:none"' : '';
@@ -97,9 +97,11 @@ add_action('admin_enqueue_scripts', 'ophim_include_myuploadscript');
 add_action('init', 'framework_core', 0);
 function ophim_meta_box()
 {
-    add_meta_box('info_phim', 'Thông tin', 'info_phim', 'ophim');
-    if ($_GET['action'] == 'edit') {
-        add_meta_box('link_custom_box_html', 'Tập phim', 'link_custom_box_html', 'ophim');
+    if (isset($_GET['action'])) {
+        add_meta_box('info_phim', 'Thông tin', 'info_phim', 'ophim');
+        if ($_GET['action'] == 'edit') {
+            add_meta_box('link_custom_box_html', 'Tập phim', 'link_custom_box_html', 'ophim');
+        }
     }
 }
 
@@ -112,14 +114,14 @@ function info_phim($post)
 
 function ophim_thongtin_save($post_id)
 {
-    $post = $_POST['ophim'];
-    $post['ophim_is_copyright'] = isset($post['ophim_is_copyright']) ? $post['ophim_is_copyright'] : '';
-    foreach ($post as $key => $p) {
-        update_post_meta($post_id, $key, $p);
+    if (isset($_POST['ophim'])) {
+        $post = $_POST['ophim'];
+        $post['ophim_is_copyright'] = isset($post['ophim_is_copyright']) ? $post['ophim_is_copyright'] : '';
+        foreach ($post as $key => $p) {
+            update_post_meta($post_id, $key, $p);
+        }
+        return $post_id;
     }
-
-
-    return $post_id;
 }
 
 add_action('save_post', 'ophim_thongtin_save');
@@ -128,11 +130,11 @@ add_action('save_post', 'savephim');
 
 function savephim($post_id)
 {
-
-    $antiguo = get_post_meta($post_id, 'ophim_episode_list', true);
-
-    $nuevo = $_POST['episode'];
-    if (!empty($nuevo) && $nuevo != $antiguo) update_post_meta($post_id, 'ophim_episode_list', $nuevo); elseif (empty($nuevo) && $antiguo) delete_post_meta($post_id, 'ophim_episode_list', $antiguo);
+    if (isset($_POST['episode'])) {
+        $antiguo = get_post_meta($post_id, 'ophim_episode_list', true);
+        $nuevo = $_POST['episode'];
+        if (!empty($nuevo) && $nuevo != $antiguo) update_post_meta($post_id, 'ophim_episode_list', $nuevo); elseif (empty($nuevo) && $antiguo) delete_post_meta($post_id, 'ophim_episode_list', $antiguo);
+    }
 }
 
 
