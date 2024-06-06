@@ -75,3 +75,9 @@ function op_get_directors($limit = 10,$end ='')
     }
     return $html;
 }
+function op_get_status()
+{
+    if(op_get_meta('movie_status') == 'trailer'){ return 'Sắp chiếu'; }
+    if(op_get_meta('movie_status') == 'ongoing'){ return 'Đang chiếu'; }
+    if(op_get_meta('movie_status') == 'completed'){ return 'Hoàn thành'; }
+}
