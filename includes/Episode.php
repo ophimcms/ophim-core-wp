@@ -12,6 +12,26 @@ function watchUrl(){
     return '';
 
 }
+function episodeUrl($current_url){
+    $listphim = get_post_meta(get_the_id(), 'ophim_episode_list', true);
+    $checkUrl = explode("/", $current_url);
+    $explode = explode("-sv-", $checkUrl[2]);
+    $tap = str_replace('tap-','',$explode[0]);
+    $sv = $explode[1];
+    $iframe = $listphim[$sv];
+    if($iframe){
+        foreach ($listphim[$sv]['server_data'] as $l=>$list){
+            if (slugify($list['name']) == $tap) {
+                $keytap = $l;
+            }
+        }
+        if(isset($listphim[$sv]['server_data'][$keytap])){
+            return $listphim[$sv]['server_data'][$keytap];
+        }
+        return '';
+    }
+    return '';
+}
 
 function op_get_regions($end ='')
 {
