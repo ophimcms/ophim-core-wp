@@ -13,6 +13,8 @@ function watchUrl(){
 
 }
 function episodeUrl($current_url){
+    $slugView = '/xem-phim/';
+    $post_slug = basename(get_permalink(get_the_id()));;
     $listphim = get_post_meta(get_the_id(), 'ophim_episode_list', true);
     $checkUrl = explode("/", $current_url);
     $explode = explode("-sv-", $checkUrl[2]);
@@ -26,7 +28,13 @@ function episodeUrl($current_url){
             }
         }
         if(isset($listphim[$sv]['server_data'][$keytap])){
-            return $listphim[$sv]['server_data'][$keytap];
+            $data =  $listphim[$sv]['server_data'][$keytap];
+            $data['next'] = '';
+            if(isset($listphim[$sv]['server_data'][$keytap+1])){
+                $next = home_url("/") . $slugView . $post_slug . '/tap-' . ($tap+1) . '-sv-' . $sv;
+                $data['next'] = $next;
+            }
+            return $data;
         }
         return '';
     }
