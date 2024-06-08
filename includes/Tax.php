@@ -157,7 +157,7 @@ function link_custom_box_html($post)
 
 function framework_core()
 {
-    framework_create_post_type('ophim', 'OPhim', 'OPhim', get_option('ophim_slug_movies') ? get_option('ophim_slug_movies') : 'movie', ['title', 'editor', 'comments'], 'dashicons-format-video');
+    framework_create_post_type('ophim', 'OPhim', 'OPhim', get_option('ophim_slug_movies') ? get_option('ophim_slug_movies') : 'movie', ['title', 'editor'], 'dashicons-format-video');
     framework_create_taxonomies('ophim_directors', 'ophim', 'Đạo diễn', 'Đạo diễn', get_option('ophim_slug_directors') ? get_option('ophim_slug_directors') : 'directors');
     framework_create_taxonomies_cat('ophim_categories', 'ophim', 'Danh mục', 'Danh mục', get_option('ophim_slug_categories') ? get_option('ophim_slug_categories') : 'categories');
     framework_create_taxonomies('ophim_actors', 'ophim', 'Diễn viên', 'Diễn viên', get_option('ophim_slug_actors') ? get_option('ophim_slug_actors') : 'actors');
