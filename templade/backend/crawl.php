@@ -97,6 +97,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                 <?php
                 break;
             default:
+                $crawl_ophim_settings = json_decode(get_option(CRAWL_OPHIM_OPTION_SETTINGS, []));
                 ?>
                 <div class="crawl_main">
                     <div class="crawl_filter notice notice-info">
@@ -129,7 +130,12 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                             }
                             ?>
                         </div>
+                        <div class="filter_title"><strong>Tải ảnh</strong></div>
+                        <div class="filter_item">
+                            <label>  <input type="checkbox" name="crawl_download_img" <?php  if($crawl_ophim_settings->crawl_download_img == 'on') { echo 'checked'; }    ?> /></label>
+                        </div>
                         <p>
+
                         <div id="save_crawl_ophim_schedule" class="button">Lưu cấu hình cho crawl tự động</div>
                         </p>
                     </div>

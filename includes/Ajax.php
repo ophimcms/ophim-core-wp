@@ -60,6 +60,7 @@ function crawl_ophim_save_settings()
     $data = array(
         'pageFrom' => $_POST['pageFrom'] ?? 5,
         'pageTo' => $_POST['pageTo'] ?? 1,
+        'crawl_download_img' => $_POST['crawl_download_img'] ?? null,
         'filterType' => $_POST['filterType'] ?? array(),
         'filterCategory' => $_POST['filterCategory'] ?? array(),
         'filterCountry' => $_POST['filterCountry'] ?? array(),

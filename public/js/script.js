@@ -322,6 +322,7 @@ jQuery(function ($) {
     $("#save_crawl_ophim_schedule").on("click", () => {
         let pageFrom = $("input[name=page_from]").val();
         let pageTo = $("input[name=page_to]").val();
+        let crawl_download_img = $("input[name=crawl_download_img]:checked").val();
         let filterType = [];
         $("input[name='filter_type[]']:checked").each(function () {
             filterType.push($(this).val());
@@ -346,7 +347,8 @@ jQuery(function ($) {
                 pageTo,
                 filterType,
                 filterCategory,
-                filterCountry
+                filterCountry,
+                crawl_download_img,
             },
             success: function (res) {
                 alert("Lưu thành công!")

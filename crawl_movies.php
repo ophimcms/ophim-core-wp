@@ -281,13 +281,17 @@ function add_posts($data)
     );
     $post_id 						= wp_insert_post($post_data);
 
-    if($data['poster'] && $data['poster'] != "") {
-        $res 								= save_images($data['poster'], $post_id, $data['title']);
-        $poster_image_url 	= str_replace(get_site_url(), '', $res['url']);
+    if(json_decode(get_option(CRAWL_OPHIM_OPTION_SETTINGS, false))->crawl_download_img == 'on'){
+        if($data['poster'] && $data['poster'] != "") {
+            $res 								= save_images($data['poster'], $post_id, $data['title']);
+            $poster_image_url 	= str_replace(get_site_url(), '', $res['url']);
+        }
+        $res_thumb =    save_images($data['thumbnail'], $post_id, $data['title'], true);
+        $thumb_image_url 		= str_replace(get_site_url(), '', $res_thumb['url']);
+    }else{
+        $poster_image_url =$data['poster'];
+        $thumb_image_url = $data['thumbnail'];
     }
-    $res_thumb =    save_images($data['thumbnail'], $post_id, $data['title'], true);
-    $thumb_image_url 		= str_replace(get_site_url(), '', $res_thumb['url']);
-
     $status = getStatus($data['status']);
     //
     update_post_meta($post_id, 'ophim_movie_formality', $formality);
