@@ -113,7 +113,8 @@ function search_film(){
                 'original_title' => op_get_meta('original_title'),
                 'year' => op_get_meta('year'),
                 'total_episode' => op_get_meta('total_episode' ),
-                'image' => str_replace(explode("/wp-content/",get_the_post_thumbnail_url())[0],'',get_the_post_thumbnail_url()),
+                'image' => op_get_meta('thumb_url'),
+                'image_poster' => op_get_meta('poster_url'),
                 'slug' => get_permalink(),
             );
         endwhile;
