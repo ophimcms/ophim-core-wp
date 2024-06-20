@@ -37,6 +37,15 @@ function episodeSV(){
 function hrefEpisode($episode,$sv){
     return home_url("xem-phim/" . basename(get_permalink(get_the_id()))) . '/tap-'. slugify($episode) . '-sv-' . $sv ;
 }
+function nextEpisodeUrl(){
+    return episodeUrl()['next'];
+}
+function m3u8EpisodeUrl(){
+    return episodeUrl()['link_m3u8'];
+}
+function embedEpisodeUrl(){
+    return episodeUrl()['link_embed'];
+}
 function episodeUrl(){
     global $wp;
     $current_url =$wp->request;
