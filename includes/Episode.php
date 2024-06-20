@@ -225,6 +225,10 @@ function op_get_total_episode()
 {
     return op_get_meta('total_episode');
 }
+function op_get_featured_post()
+{
+    return op_get_meta('featured_post');
+}
 function op_get_quality()
 {
     return op_get_meta('quality');
