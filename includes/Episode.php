@@ -224,6 +224,10 @@ function op_get_is_copyright()
 {
     return op_get_meta('is_copyright');
 }
+function op_get_trailer_url()
+{
+    return op_get_meta('trailer_url');
+}
 function op_get_year($end ='')
 {
     $html = "";
