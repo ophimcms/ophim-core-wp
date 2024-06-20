@@ -20,6 +20,8 @@ define('OFIM_TEMPLADE_PATCH'  ,OFIM_PLUGIN_PATCH.'template');
 define('OFIM_VALIDATES_PATCH'  ,OFIM_PLUGIN_PATCH.'validates');
 
 //OTHER
+define('OFIM_CACHE_TIME', 172800);
+define('OFIM_CACHE_DIR', OFIM_PLUGIN_PATCH . 'cache/');
 
 define('OFIM_PREFIX'  ,'OFIM_');
 

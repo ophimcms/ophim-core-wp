@@ -100,7 +100,7 @@
         </thead>
         <tbody>
         <?php
-        if ($data2['desktop']) : foreach ($data2['desktop'] as $k => $field) { ?>
+        if (isset($data2['desktop'])) : foreach ($data2['desktop'] as $k => $field) { ?>
             <tr class="tritem" id="item">
                 <td class="draggable"><span class="dashicons dashicons-move"></td>
                 <td class="text_player"><input type="text" class="widefat"
@@ -139,7 +139,7 @@
         <tbody>
 
         <?php
-        if ($data2['mobile']) : foreach ($data2['mobile'] as $k => $field) { ?>
+        if (isset($data2['mobile'])) : foreach ($data2['mobile'] as $k => $field) { ?>
             <tr class="tritem" id="item">
                 <td class="draggable"><span class="dashicons dashicons-move"></td>
                 <td class="text_player"><input type="text" class="widefat"

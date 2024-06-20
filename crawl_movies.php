@@ -15,7 +15,7 @@ function crawl_ophim_page_handle($url)
 
     if(count($sourcePage) > 0) {
         foreach ($sourcePage as $key => $item) {
-            array_push($listMovies, "https://ophim1.com/phim/{$item->slug}|{$item->_id}|{$item->modified->time}|{$item->name}|{$item->origin_name}|{$item->year}");
+            array_push($listMovies, API_DOMAIN . "/phim/{$item->slug}|{$item->_id}|{$item->modified->time}|{$item->name}|{$item->origin_name}|{$item->year}");
         }
         return join("\n", $listMovies);
     }
@@ -233,7 +233,7 @@ function create_data($sourcePage, $url, $ophim_id, $ophim_update_time, $filterTy
 		'episode'									=> $sourcePage["movie"]["episode_current"],
 		'total_episode'						=> $sourcePage["movie"]["episode_total"],
 		'tags'      							=> $arrTags,
-		'content'   							=> preg_replace('/\\r?\\n/s', '', $sourcePage["movie"]["content"]),
+		'content'   							=> strip_tags(preg_replace('/\\r?\\n/s', '', $sourcePage["movie"]["content"])),
 		'actor'										=> implode(',', $sourcePage["movie"]["actor"]),
 		'director'								=> implode(',', $sourcePage["movie"]["director"]),
 		'country'									=> $arrCountry,

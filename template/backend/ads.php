@@ -105,13 +105,13 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                         <div class="form-wrap">
                             <div class="form-field form-required term-name-wrap">
                                 <label>Link </label>
-                                <input name="data[desktop][link]" type="text" value="<?= $data2['desktop']['link'] ?>">
+                                <input name="data[desktop][link]" type="text" value="<?= $data2['desktop']['link'] ?? '' ?>">
                             </div>
                         </div>
                         <div class="form-wrap">
                             <div class="form-field form-required term-name-wrap">
                                 <label>Image </label>
-                                <input name="data[desktop][image]" id="desktop_img_url" type="text" value="<?= $data2['desktop']['image'] ?>">
+                                <input name="data[desktop][image]" id="desktop_img_url" type="text" value="<?= $data2['desktop']['image'] ?? '' ?>">
                             </div>
                             <a href="#" class="desktop_img button">Upload image</a>
                         </div>
@@ -119,13 +119,13 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                         <div class="form-wrap">
                             <div class="form-field form-required term-name-wrap">
                                 <label>Link </label>
-                                <input name="data[mobile][link]" type="text" value="<?= $data2['mobile']['link'] ?>">
+                                <input name="data[mobile][link]" type="text" value="<?= $data2['mobile']['link'] ?? '' ?>">
                             </div>
                         </div>
                         <div class="form-wrap">
                             <div class="form-field form-required term-name-wrap">
                                 <label>Image </label>
-                                <input name="data[mobile][image]" id="mobile_img_url" type="text" value="<?= $data2['mobile']['image'] ?>">
+                                <input name="data[mobile][image]" id="mobile_img_url" type="text" value="<?= $data2['mobile']['image'] ?? '' ?>">
                             </div>
                             <a href="#" class="mobile_img button">Upload image</a>
                         </div>

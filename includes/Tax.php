@@ -96,9 +96,10 @@ add_action('admin_enqueue_scripts', 'ophim_include_myuploadscript');
 add_action('init', 'framework_core', 0);
 function ophim_meta_box()
 {
-    if (isset($_GET['action'])) {
+    global $typenow;
+    if ($typenow == 'ophim') {
         add_meta_box('info_phim', 'Thông tin', 'info_phim', 'ophim');
-        if ($_GET['action'] == 'edit') {
+        if (isset($_GET['action']) && $_GET['action'] == 'edit') {
             add_meta_box('link_custom_box_html', 'Tập phim', 'link_custom_box_html', 'ophim');
         }
     }
