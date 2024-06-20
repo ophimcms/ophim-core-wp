@@ -5,7 +5,7 @@ function watchUrl(){
     $post_slug = basename(get_permalink(get_the_id()));;
     $listphim = get_post_meta(get_the_id(), 'ophim_episode_list', true);
     if (is_array($listphim)) {
-        $tapdau = slugify(reset($listphim)['server_data'][0]['name']);
+        $tapdau = slugify(reset(reset($listphim)['server_data'])['name']);
          $episodeUrl = home_url("/") . $slugView . $post_slug . '/tap-' . $tapdau . '-sv-' . array_key_first($listphim);
          return $episodeUrl;
     }
