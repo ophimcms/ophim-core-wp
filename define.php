@@ -16,7 +16,7 @@ define('OFIM_CONTROLLERS_PATCH'  ,OFIM_PLUGIN_PATCH.'controllers');
 define('OFIM_HELPERS_PATCH'  ,OFIM_PLUGIN_PATCH.'helpers');
 define('OFIM_INCLUDE_PATCH'  ,OFIM_PLUGIN_PATCH.'includes');
 define('OFIM_MODELS_PATCH'  ,OFIM_PLUGIN_PATCH.'models');
-define('OFIM_TEMPLADE_PATCH'  ,OFIM_PLUGIN_PATCH.'templade');
+define('OFIM_TEMPLADE_PATCH'  ,OFIM_PLUGIN_PATCH.'template');
 define('OFIM_VALIDATES_PATCH'  ,OFIM_PLUGIN_PATCH.'validates');
 
 //OTHER

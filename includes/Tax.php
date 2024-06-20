@@ -50,7 +50,6 @@ function filter_movies($defaults)
 
 add_filter('manage_ophim_posts_columns', 'filter_movies');
 add_action('manage_ophim_posts_custom_column', function ($column_key, $post_id) {
-
     if ($column_key == 'rating') {
         echo op_get_rating();
     }

@@ -97,7 +97,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                 <?php
                 break;
             default:
-                $crawl_ophim_settings = json_decode(get_option(CRAWL_OPHIM_OPTION_SETTINGS, []));
+                $crawl_ophim_settings = json_decode(get_option(CRAWL_OPHIM_OPTION_SETTINGS, '[]'));
                 ?>
                 <div class="crawl_main">
                     <div class="crawl_filter notice notice-info">
@@ -146,7 +146,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                     </div>
 
                     <div class="crawl_page">
-                        Url API <input type="text" id="url_api" value="" style="width: 70%">
+                        Url API <input type="text" id="url_api" value="<?php echo API_DOMAIN;?>/danh-sach/phim-moi-cap-nhat" style="width: 70%">
                         <div id="get_list_movies" class="primary">Get List Movies</div>
                     </div>
 

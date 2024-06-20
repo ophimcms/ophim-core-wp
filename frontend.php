@@ -66,7 +66,7 @@ class oFim_Frontend
         $episode = $oController->getModel('Episode', '');
         $episodes = $episode->getByMovieId($fims->id);
         $embed = $episode->getByMovieIdSlug($fims->id,$tap);
-        include_once("templade/frontend/xingkong/episode.php");
+        include_once("template/frontend/xingkong/episode.php");
     }
 
     function getMovieOverview($slug)
@@ -76,7 +76,7 @@ class oFim_Frontend
         $fims = $movie->getBySlug($slug);
         $episode = $oController->getModel('Episode', '');
         $episodes = $episode->getByMovieId($fims->id);
-        include_once("templade/frontend/xingkong/single.php");
+        include_once("template/frontend/xingkong/single.php");
     }
 
     function home()
@@ -84,7 +84,7 @@ class oFim_Frontend
         global $oController;
         $movie = $oController->getModel('Movie', '');
         $fims = $movie->getAll();
-        include_once("templade/frontend/xingkong/index.php");
+        include_once("template/frontend/xingkong/index.php");
     }
 
 }
