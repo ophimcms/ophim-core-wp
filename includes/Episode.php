@@ -12,7 +12,34 @@ function watchUrl(){
     return '';
 
 }
-function episodeUrl($current_url){
+function episodeList(){
+    return get_post_meta(get_the_id(), 'ophim_episode_list', true);
+}
+function isEpisode(){
+    global $wp;
+    if (str_contains($wp->request, 'xem-phim') && episodeUrl($wp->request)) {
+        return true;
+    }
+    return false;
+}
+function episodeName(){
+    global $wp;
+    $checkUrl = explode("/", $wp->request);
+    $explode = explode("-sv-", $checkUrl[2]);
+    return str_replace('tap-', '', $explode[0]);
+}
+function episodeSV(){
+    global $wp;
+    $checkUrl = explode("/", $wp->request);
+    $explode = explode("-sv-", $checkUrl[2]);
+    return  $explode[1];
+}
+function hrefEpisode($episode,$sv){
+    return home_url("xem-phim/" . basename(get_permalink(get_the_id()))) . '/tap-'. slugify($episode) . '-sv-' . $sv ;
+}
+function episodeUrl(){
+    global $wp;
+    $current_url =$wp->request;
     $slugView = '/xem-phim/';
     $post_slug = basename(get_permalink(get_the_id()));;
     $listphim = get_post_meta(get_the_id(), 'ophim_episode_list', true);
@@ -49,9 +76,8 @@ function op_get_regions($end ='')
     }else{
         $slug = 'regions';
     }
-    global $post;
     $html = "";
-    $country = get_the_terms($post->ID, "ophim_regions");
+    $country = get_the_terms(get_the_ID(), "ophim_regions");
     if (is_array($country)) {
         foreach ($country as $ct) {
             $html .= "<a href=\"" . home_url($slug . "/" . $ct->slug) . "\" title=\"" . $ct->name . "\">" . $ct->name . "</a>". $end;
@@ -68,9 +94,8 @@ function op_get_years($end ='')
     }else{
         $slug = 'years';
     }
-    global $post;
     $html = "";
-    $years = get_the_terms($post->ID, "ophim_years");
+    $years = get_the_terms(get_the_ID(), "ophim_years");
     if (is_array($years)) {
         foreach ($years as $y) {
             $html .= "<a href=\"" . home_url($slug . "/" . $y->slug) . "\" title=\"" . $y->name . "\">" . $y->name . "</a>". $end;
@@ -87,9 +112,8 @@ function op_get_genres($end ='')
     }else{
         $slug = 'genres';
     }
-    global $post;
     $html = "";
-    $genres = get_the_terms($post->ID, "ophim_genres");
+    $genres = get_the_terms(get_the_ID(), "ophim_genres");
     if (is_array($genres)) {
         foreach ($genres as $genre) {
             $html .= "<a href=\"" . home_url($slug . "/" . $genre->slug) . "\" title=\"" . $genre->name . "\">" . $genre->name . "</a>".$end;
@@ -106,9 +130,8 @@ function op_get_tags($end ='')
     }else{
         $slug = 'tags';
     }
-    global $post;
     $html = "";
-    $tags = get_the_terms($post->ID, "ophim_tags");
+    $tags = get_the_terms(get_the_ID(), "ophim_tags");
     if (is_array($tags)) {
         foreach ($tags as $tag) {
             $html .= "<a href=\"" . home_url($slug . "/" . $tag->slug) . "\" title=\"" . $tag->name . "\">" . $tag->name . "</a>".$end;
@@ -124,9 +147,8 @@ function op_get_actors($limit = 10,$end ='')
     }else{
         $slug = 'actors';
     }
-    global $post;
     $html = "";
-    $actors = get_the_terms($post->ID, "ophim_actors");
+    $actors = get_the_terms(get_the_ID(), "ophim_actors");
     if (is_array($actors)) {
         foreach (array_slice($actors, 0, $limit) as $actor) {
             $html .= "<a href=\"" . home_url($slug . "/" . $actor->slug) . "\" title=\"" . $actor->name . "\">" . $actor->name . "</a>".$end;
@@ -142,9 +164,8 @@ function op_get_directors($limit = 10,$end ='')
     }else{
         $slug = 'directors';
     }
-    global $post;
     $html = "";
-    $directors = get_the_terms($post->ID, "ophim_directors");
+    $directors = get_the_terms(get_the_ID(), "ophim_directors");
     if (is_array($directors)) {
         foreach (array_slice($directors, 0, $limit) as $director) {
             $html .= "<a href=\"" . home_url($slug . "/" . $director->slug) . "\" title=\"" . $director->name . "\">" . $director->name . "</a>".$end;
@@ -157,4 +178,60 @@ function op_get_status()
     if(op_get_meta('movie_status') == 'trailer'){ return 'Sắp chiếu'; }
     if(op_get_meta('movie_status') == 'ongoing'){ return 'Đang chiếu'; }
     if(op_get_meta('movie_status') == 'completed'){ return 'Hoàn thành'; }
+    return  'Sắp chiếu';
+}
+function op_get_notify()
+{
+    return op_get_meta('notify');
+}
+function op_get_showtime_movies()
+{
+    return op_get_meta('showtime_movies');
+}
+function op_get_original_title()
+{
+    return op_get_meta('original_title');
+}
+function op_get_poster_url()
+{
+    return op_get_meta('poster_url');
+}
+function op_get_thumb_url()
+{
+    return op_get_meta('thumb_url');
+}
+function op_get_runtime()
+{
+    return op_get_meta('runtime');
+}
+function op_get_episode()
+{
+    return op_get_meta('episode');
+}
+function op_get_total_episode()
+{
+    return op_get_meta('total_episode');
+}
+function op_get_quality()
+{
+    return op_get_meta('quality');
+}
+function op_get_lang()
+{
+    return op_get_meta('lang');
+}
+function op_get_is_copyright()
+{
+    return op_get_meta('is_copyright');
+}
+function op_get_year($end ='')
+{
+    $html = "";
+    $years = get_the_terms(get_the_ID(), "ophim_years");
+    if (is_array($years)) {
+        foreach ($years as $y) {
+            $html .= $y->name. $end;
+        }
+    }
+    return $html;
 }
