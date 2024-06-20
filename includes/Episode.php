@@ -47,8 +47,12 @@ function episodeUrl(){
     $explode = explode("-sv-", $checkUrl[2]);
     $tap = str_replace('tap-','',$explode[0]);
     $sv = $explode[1];
+    if (!isset($listphim[$sv])){
+        return '';
+    }
     $iframe = $listphim[$sv];
     if($iframe){
+        $keytap = null;
         foreach ($listphim[$sv]['server_data'] as $l=>$list){
             if (slugify($list['name']) == $tap) {
                 $keytap = $l;
