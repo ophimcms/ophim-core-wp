@@ -71,7 +71,7 @@ function episodeUrl(){
             $data =  $listphim[$sv]['server_data'][$keytap];
             $data['next'] = '';
             if(isset($listphim[$sv]['server_data'][$keytap+1])){
-                $next = home_url("/") . $slugView . $post_slug . '/tap-' . ($tap+1) . '-sv-' . $sv;
+                $next = home_url("/") . $slugView . $post_slug . '/tap-' . (slugify($listphim[$sv]['server_data'][$keytap+1]['name'])) . '-sv-' . $sv;
                 $data['next'] = $next;
             }
             return $data;
