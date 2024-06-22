@@ -119,6 +119,8 @@ function search_film(){
             );
         endwhile;
         wp_reset_postdata();
+        else :
+            $post = [];
     endif;
     echo json_encode( $post );
     die();
