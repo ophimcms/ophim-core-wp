@@ -1,1 +1,2 @@
-<h1>Hello OFim</h1>
+<h1>Xin chào</h1>
+<p>OPhim Core cho wordpress. CMS tạo website xem phim với nhiều giao diện đa dạng, dữ liệu phim miễn phí. Chỉ nên tải mã nguồn chính thức từ diễn đàn <a href="https://forum.ophim.cc/"> https://forum.ophim.cc/</a></p>
