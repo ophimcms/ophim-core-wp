@@ -145,7 +145,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                     update_option('ophim_adstop', $_POST['ophim_adstop']);
                     update_option('ophim_ads_footer', $_POST['ophim_ads_footer']);
                     update_option('ophim_ads_overlay', $_POST['ophim_ads_overlay']);
-                    update_option('ophim_ads_link', $_POST['ophim_ads_link']);
+                    update_option('ophim_ads_link', $_POST['ophim_ads_link'] ?? null);
                     update_option('ophim_ads_link_value', $_POST['ophim_ads_link_value']);
                 }
                 ?>

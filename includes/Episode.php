@@ -99,6 +99,12 @@ function op_get_regions($end ='')
     return $html;
 }
 
+
+function op_get_region()
+{
+    return get_the_terms(get_the_ID(), "ophim_regions");
+}
+
 function op_get_years($end ='')
 {
     $getslug = get_option('ophim_slug_years');
@@ -115,6 +121,11 @@ function op_get_years($end ='')
         }
     }
     return $html;
+}
+
+function op_get_yeare()
+{
+    return get_the_terms(get_the_ID(), "ophim_years");
 }
 
 function op_get_genres($end ='')
@@ -135,6 +146,11 @@ function op_get_genres($end ='')
     return $html;
 }
 
+function op_get_genre()
+{
+    return get_the_terms(get_the_ID(), "ophim_genres");
+}
+
 function op_get_tags($end ='')
 {
     $getslug = get_option('ophim_slug_tags');
@@ -151,6 +167,11 @@ function op_get_tags($end ='')
         }
     }
     return $html;
+}
+
+function op_get_tag()
+{
+    return get_the_terms(get_the_ID(), "ophim_tags");
 }
 function op_get_actors($limit = 10,$end ='')
 {
@@ -169,6 +190,10 @@ function op_get_actors($limit = 10,$end ='')
     }
     return $html;
 }
+function op_get_actor()
+{
+    return get_the_terms(get_the_ID(), "ophim_actors");
+}
 function op_get_directors($limit = 10,$end ='')
 {
     $getslug = get_option('ophim_slug_directors');
@@ -185,6 +210,10 @@ function op_get_directors($limit = 10,$end ='')
         }
     }
     return $html;
+}
+function op_get_director()
+{
+    return get_the_terms(get_the_ID(), "ophim_directors");
 }
 function op_get_status()
 {

@@ -7,9 +7,6 @@ class OFim_AdminCrawl_Controller{
     }
 
     public function display(){
-
-        global $oController;
-
         $categoryFromApi = $this->cache->remember('ophim_the_loai', OFIM_CACHE_TIME, function() {
             try {
                 $data = file_get_contents(API_DOMAIN . '/the-loai');
@@ -30,8 +27,22 @@ class OFim_AdminCrawl_Controller{
             }
         });
 
-        $schedule_log = $oController->getLastLog();
+        $schedule_log = $this->getLastLog();
         include_once(OFIM_TEMPLADE_PATCH."/backend/crawl.php"); // included template file
+    }
+    public function getLastLog() {
+        $log_path = WP_CONTENT_DIR  . '/crawl_ophim_logs';
+        $log_filename = 'log_' . date('d-m-Y') . '.log';
+        $log_data = $log_path.'/'.$log_filename;
+        if (file_exists($log_data)) {
+            $log = file_get_contents($log_data);
+        }else{
+            $log = "The file $log_filename does not exist";
+        }
+        return array(
+            'log_filename' => $log_filename,
+            'log_data' => $log
+        );
     }
 
 }
