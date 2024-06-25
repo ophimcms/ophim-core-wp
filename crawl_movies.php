@@ -345,7 +345,7 @@ function download_resize_thumb($data, $post_id, $crawl_settings)
     $thumb_image_url = $data['thumbnail'];
     $convert_webp = oIsset($crawl_settings, 'crawl_convert_webp', 'off') == 'on' ? true : false;
     try {
-        if ($crawl_settings->crawl_resize_size_thumb == 'on') {
+        if (oIsset($crawl_settings, 'crawl_resize_size_thumb', 'off') == 'on') {
             $res_thumb = save_images(
                 $data['thumbnail'],
                 $post_id, $data['title'],
@@ -367,7 +367,7 @@ function download_resize_poster($data, $post_id, $crawl_settings)
     $poster_image_url = $data['poster'];
     $convert_webp = oIsset($crawl_settings, 'crawl_convert_webp', 'off') == 'on' ? true : false;
     try {
-        if ($crawl_settings->crawl_resize_size_poster == 'on') {
+        if (oIsset($crawl_settings, 'crawl_resize_size_poster', 'off') == 'on') {
             if ($data['poster'] && $data['poster'] != "") {
                 $res = save_images(
                     $data['poster'],
