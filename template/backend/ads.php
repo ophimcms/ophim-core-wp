@@ -7,9 +7,9 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
 <div class="wrap">
     <nav class="nav-tab-wrapper">
         <a href="?page=ofim-manager-ads" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Cấu hình</a>
-        <a href="?page=ofim-manager-ads&tab=top" class="nav-tab <?php if($tab==='top'):?>nav-tab-active<?php endif; ?>">Top</a>
-        <a href="?page=ofim-manager-ads&tab=footer" class="nav-tab <?php if($tab==='footer'):?>nav-tab-active<?php endif; ?>">Footer</a>
-        <a href="?page=ofim-manager-ads&tab=overlay" class="nav-tab <?php if($tab==='overlay'):?>nav-tab-active<?php endif; ?>">Overlay</a>
+        <a href="?page=ofim-manager-ads&tab=top" class="nav-tab <?php if($tab==='top'):?>nav-tab-active<?php endif; ?>">Top Banner</a>
+        <a href="?page=ofim-manager-ads&tab=footer" class="nav-tab <?php if($tab==='footer'):?>nav-tab-active<?php endif; ?>">Catfish Banner</a>
+        <a href="?page=ofim-manager-ads&tab=overlay" class="nav-tab <?php if($tab==='overlay'):?>nav-tab-active<?php endif; ?>">Popup Banner</a>
     </nav>
     <div class="tab-content">
         <?php
@@ -152,26 +152,18 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                 <div class="crawl_main">
                     <form enctype="multipart/form-data" name="frmRElect" action="<?php esc_url($_SERVER['REQUEST_URI']); ?>"
                           method="post">
-                    <div class="crawl_filter notice notice-info">
-                        <div class="filter_title"><strong>Bật quảng cáo</strong></div>
+                    <div class="crawl_filter notice notice-info" style="padding: 20px 20px">
+                        <div class="filter_title"></div>
                         <div class="filter_item">
-                            <input type="checkbox" name="ophim_is_ads" <?php  if(get_option('ophim_is_ads') == 'on') { echo 'checked'; }    ?> />
+                            <label><input type="checkbox" name="ophim_is_ads" <?php  if(get_option('ophim_is_ads') == 'on') { echo 'checked'; }    ?> /> <strong>Bật quảng cáo</strong></label>
+                            <label><input type="checkbox" name="ophim_adstop" <?php  if(get_option('ophim_adstop') == 'on') { echo 'checked'; }    ?> /> <strong>Top banner</strong></label>
+                            <label><input type="checkbox" name="ophim_ads_footer" <?php  if(get_option('ophim_ads_footer') == 'on') { echo 'checked'; }    ?> /> <strong>Catfish banner</strong></label>
+                            <label><input type="checkbox" name="ophim_ads_overlay" <?php  if(get_option('ophim_ads_overlay') == 'on') { echo 'checked'; }    ?> /> <strong>Popup banner</strong></label>
                         </div>
-                        <div class="filter_title"><strong>Quảng cáo đầu trang</strong></div>
+
+                        <div class="filter_title"></div>
                         <div class="filter_item">
-                            <input type="checkbox" name="ophim_adstop" <?php  if(get_option('ophim_adstop') == 'on') { echo 'checked'; }    ?> />
-                        </div>
-                        <div class="filter_title"><strong>Quảng cáo cuối trang</strong></div>
-                        <div class="filter_item">
-                            <input type="checkbox" name="ophim_ads_footer" <?php  if(get_option('ophim_ads_footer') == 'on') { echo 'checked'; }    ?> />
-                        </div>
-                        <div class="filter_title"><strong>Popup gữa trang</strong></div>
-                        <div class="filter_item">
-                            <input type="checkbox" name="ophim_ads_overlay" <?php  if(get_option('ophim_ads_overlay') == 'on') { echo 'checked'; }    ?> />
-                        </div>
-                        <div class="filter_title"><strong>Click link</strong></div>
-                        <div class="filter_item">
-                            <input type="checkbox" name="ophim_ads_link" <?php  if(get_option('ophim_ads_link') == 'on') { echo 'checked'; }    ?> />
+                            <label><input type="checkbox" name="ophim_ads_link" <?php  if(get_option('ophim_ads_link') == 'on') { echo 'checked'; }    ?> /> <strong>Click link</strong></label>
                         </div>
                         <div class="form-field form-required term-name-wrap">
                             <label>Link </label>
