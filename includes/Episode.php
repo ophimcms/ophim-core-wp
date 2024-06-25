@@ -34,6 +34,10 @@ function episodeSV(){
     $explode = explode("-sv-", $checkUrl[2]);
     return  $explode[1];
 }
+function getCurrentUrl(){
+    global $wp;
+    return home_url($wp->request);
+}
 function hrefEpisode($episode,$sv){
     return home_url("xem-phim/" . basename(get_permalink(get_the_id()))) . '/tap-'. slugify($episode) . '-sv-' . $sv ;
 }

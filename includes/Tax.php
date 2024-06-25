@@ -1,5 +1,11 @@
 <?php
 
+function new_rewrite_rule()
+{
+    add_rewrite_rule('xem-phim/([^/]*)/([^/]*)', 'index.php?ophim=$matches[1]', 'top');
+}
+
+add_action('init', 'new_rewrite_rule');
 
 //filter feature
 function wisdom_filter_tracked_plugins()
