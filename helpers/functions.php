@@ -21,4 +21,11 @@ function cleanStr($str)
 	return $str;
 }
 
-
+function oIsset($data, $meta, $default = '')
+{
+    if(!is_array($data)) {
+        $data = json_encode($data);
+        $data = json_decode($data, true);
+    }
+    return isset($data[$meta]) ? $data[$meta] : $default;
+}

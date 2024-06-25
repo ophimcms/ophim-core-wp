@@ -322,7 +322,13 @@ jQuery(function ($) {
     $("#save_crawl_ophim_schedule").on("click", () => {
         let pageFrom = $("input[name=page_from]").val();
         let pageTo = $("input[name=page_to]").val();
-        let crawl_download_img = $("input[name=crawl_download_img]:checked").val();
+        let crawl_resize_size_thumb = $("input[name=crawl_resize_size_thumb]:checked").val();
+        let crawl_resize_size_thumb_w = $("input[name=crawl_resize_size_thumb_w]").val();
+        let crawl_resize_size_thumb_h = $("input[name=crawl_resize_size_thumb_h]").val();
+        let crawl_resize_size_poster = $("input[name=crawl_resize_size_poster]:checked").val();
+        let crawl_resize_size_poster_w = $("input[name=crawl_resize_size_poster_w]").val();
+        let crawl_resize_size_poster_h = $("input[name=crawl_resize_size_poster_h]").val();
+        let crawl_convert_webp = $("input[name=crawl_convert_webp]:checked").val();
         let filterType = [];
         $("input[name='filter_type[]']:checked").each(function () {
             filterType.push($(this).val());
@@ -348,7 +354,13 @@ jQuery(function ($) {
                 filterType,
                 filterCategory,
                 filterCountry,
-                crawl_download_img,
+                crawl_resize_size_thumb,
+                crawl_resize_size_thumb_w,
+                crawl_resize_size_thumb_h,
+                crawl_resize_size_poster,
+                crawl_resize_size_poster_w,
+                crawl_resize_size_poster_h,
+                crawl_convert_webp,
             },
             success: function (res) {
                 alert("Lưu thành công!")

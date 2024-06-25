@@ -11,6 +11,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 require_once 'define.php';
 require_once OFIM_HELPERS_PATCH.'/cache.php';
+require_once OFIM_HELPERS_PATCH.'/functions.php';
 require_once OFIM_INCLUDE_PATCH.'/Controller.php';
 require_once OFIM_INCLUDE_PATCH.'/Permalink.php';
 require_once OFIM_INCLUDE_PATCH.'/Tax.php';
