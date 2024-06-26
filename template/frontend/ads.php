@@ -6,6 +6,29 @@
 <div id=footer_fixed_ads></div>
 <link href="<?= OFIM_PUBLIC_URL ?>/ads/ad_c_c.css" rel="stylesheet">
 <script>
+    function setCookie(c_name,value,exsec)
+    {
+        var now = new Date();
+        var exp = new Date(now.getTime() + exsec*1000);
+        var c_value=escape(value) + ((exsec==null) ? "" : "; expires="+exp.toUTCString());
+        document.cookie=c_name + "=" + c_value;
+    }
+    function getCookie(c_name)
+    {
+        var i,x,y,ARRcookies=document.cookie.split(";");
+        for (i=0;i<ARRcookies.length;i++)
+        {
+            x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+            y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+            x=x.replace(/^\s+|\s+$/g,"");
+            if (x==c_name)
+            {
+                return unescape(y);
+            }
+        }
+    }
+</script>
+<script>
     var topAdsConf = <?= get_option('ophim_adstop_list') ?>;
     var footerFixAds = <?= get_option('ophim_footer_list') ?>;
     var overlayAds = <?= get_option('ophim_overlay_list') ?>;
@@ -19,7 +42,12 @@
     <?php if(get_option('ophim_ads_link') == 'on') { ?>
     document.body.addEventListener("click", function (event) {
         if (!event.target.closest('#overlay a, #overlay, #top_addd a, #top_addd, #footer_fixed_ads a, #footer_fixed_ads, center a')) {
-            window.open('<?= get_option('ophim_ads_link_value') ?>');
+            var clickads=getCookie("clickads");
+            if(!clickads){
+                window.open('<?= get_option('ophim_ads_link_value') ?>');
+                setCookie('clickads','clickads',<?= get_option('ophim_ads_cache_time','60') ?>)
+            }
+
         }
     });
     <?php } ?>
@@ -68,7 +96,11 @@
 			</div>`;
         }
         document.getElementById("overlay").innerHTML = itemAds;
-        document.getElementById('overlay').style.display = 'block';
+        var Overlay=getCookie("Overlay");
+        if(!Overlay){
+            document.getElementById('overlay').style.display = 'block';
+            setCookie('Overlay','Overlay',<?= get_option('ophim_ads_cache_time','60') ?>)
+        }
 
     }
     function randomIntFromInterval(min, max) { // min and max included
@@ -122,7 +154,13 @@
                 aboverplayer[i].innerHTML = itemAds;
             }
         } else {
-            document.getElementById("top_addd").innerHTML =itemAds;
+            try {
+                document.getElementById("top_addd").innerHTML =itemAds;
+            }
+            catch(err) {
+               console.log(err)
+            }
+
         }
     }
     function showFooterFixAds() {

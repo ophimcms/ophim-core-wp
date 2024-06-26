@@ -147,6 +147,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                     update_option('ophim_ads_overlay', $_POST['ophim_ads_overlay'] ?? null);
                     update_option('ophim_ads_link', $_POST['ophim_ads_link'] ?? null);
                     update_option('ophim_ads_link_value', $_POST['ophim_ads_link_value']);
+                    update_option('ophim_ads_cache_time', $_POST['ophim_ads_cache_time'] ?? null);
                 }
                 ?>
                 <div class="crawl_main">
@@ -164,10 +165,15 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                         <div class="filter_title"></div>
                         <div class="filter_item">
                             <label><input type="checkbox" name="ophim_ads_link" <?php  if(get_option('ophim_ads_link') == 'on') { echo 'checked'; }    ?> /> <strong>Click link</strong></label>
-                        </div>
+                        </div> <hr>
                         <div class="form-field form-required term-name-wrap">
                             <label>Link </label>
                             <input name="ophim_ads_link_value" type="text" value="<?= get_option('ophim_ads_link_value') ?>">
+                        </div>
+                        <hr>
+                        <div class="form-field form-required term-name-wrap">
+                            <label>Cache (giây)</label>
+                            <input name="ophim_ads_cache_time" type="number" value="<?= get_option('ophim_ads_cache_time') ?>">
                         </div>
                     </div>
 
