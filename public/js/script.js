@@ -155,14 +155,14 @@ jQuery(function ($) {
     buttonGetListMovies.on("click", () => {
         divMsg.show(300);
         textArealistMovies.show(300);
-        crawl_page_callback(inputPageFrom.val());
+        crawl_page_callback(parseInt(inputPageFrom.val()));
     });
     const crawl_page_callback = (currentPage) => {
         var url_api = $("#url_api").val();
 
         var urlPageCrawl = url_api+`?page=${currentPage}`;
 
-        if (currentPage < inputPageTo.val()) {
+        if (currentPage < parseInt(inputPageTo.val())) {
 
             var text = $("#result_list_movies").val();
             var lines = text.split(/\r|\r\n|\n/);
