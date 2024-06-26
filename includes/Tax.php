@@ -11,17 +11,11 @@ add_action('init', 'new_rewrite_rule');
 function wisdom_filter_tracked_plugins()
 {
     global $typenow;
-    global $wp_query;
-    if ($typenow == 'ophim') { // Your custom post type slug
-        $plugins = array('Featured'); // Options for the filter select field
-        $current_plugin = '';
-        if (isset($_GET['slug'])) {
-            $current_plugin = $_GET['slug']; // Check if option has been selected
-        } ?>
-        <select name="slug" id="slug">
+    if ($typenow == 'ophim') {
+        $current_plugin = oIsset($_GET,'featured');?>
+        <select name="featured" id="featured">
             <option value="all" <?php selected('all', $current_plugin); ?>>All</option>
             <option value="1" <?php selected('1', $current_plugin); ?>>Featured</option>
-
         </select>
     <?php }
 }
@@ -31,11 +25,10 @@ add_action('restrict_manage_posts', 'wisdom_filter_tracked_plugins');
 function wisdom_sort_plugins_by_slug($query)
 {
     global $pagenow;
-    // Get the post type
-    $post_type = isset($_GET['post_type']) ? $_GET['post_type'] : '';
-    if (is_admin() && $pagenow == 'edit.php' && $post_type == 'ophim' && isset($_GET['slug']) && $_GET['slug'] != 'all') {
+    $post_type = oIsset($_GET,'post_type');
+    if (is_admin() && $pagenow == 'edit.php' && $post_type == 'ophim' && isset($_GET['featured']) && $_GET['featured'] == '1') {
         $query->query_vars['meta_key'] = 'ophim_featured_post';
-        $query->query_vars['meta_value'] = $_GET['slug'];
+        $query->query_vars['meta_value'] = $_GET['featured'];
         $query->query_vars['meta_compare'] = '=';
     }
 }
@@ -122,7 +115,7 @@ function ophim_thongtin_save($post_id)
 {
     if (isset($_POST['ophim'])) {
         $post = $_POST['ophim'];
-        $post['ophim_is_copyright'] = isset($post['ophim_is_copyright']) ? $post['ophim_is_copyright'] : '';
+        $post['ophim_is_copyright'] = oIsset($post,'ophim_is_copyright');
         foreach ($post as $key => $p) {
             update_post_meta($post_id, $key, $p);
         }
@@ -137,17 +130,11 @@ add_action('save_post', 'savephim');
 function savephim($post_id)
 {
     if (isset($_POST['episode'])) {
-        $antiguo = get_post_meta($post_id, 'ophim_episode_list', true);
-        $nuevo = $_POST['episode'];
-        if (!empty($nuevo) && $nuevo != $antiguo) update_post_meta($post_id, 'ophim_episode_list', $nuevo); elseif (empty($nuevo) && $antiguo) delete_post_meta($post_id, 'ophim_episode_list', $antiguo);
+        $episode = $_POST['episode'];
+        update_post_meta($post_id, 'ophim_episode_list', $episode);
     }
 }
 
-
-function op_isset($data, $meta, $default = '')
-{
-    return isset($data[$meta]) ? $data[$meta] : $default;
-}
 
 function link_custom_box_html($post)
 {

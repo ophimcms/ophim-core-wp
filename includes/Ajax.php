@@ -2,7 +2,7 @@
 //ajax future
 if(!function_exists('dt_add_featured')){
     function dt_add_featured(){
-        $postid	 = op_isset($_REQUEST,'postid');
+        $postid	 = oIsset($_REQUEST,'postid');
         update_post_meta($postid, 'ophim_featured_post','1');
         die();
     }
@@ -12,7 +12,7 @@ if(!function_exists('dt_add_featured')){
 
 if(!function_exists('dt_remove_featured')){
     function dt_remove_featured(){
-        $postid	= op_isset($_REQUEST,'postid');
+        $postid	= oIsset($_REQUEST,'postid');
 
         delete_post_meta( $postid, 'ophim_featured_post');
         die();
