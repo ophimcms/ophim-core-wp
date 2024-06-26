@@ -1,67 +1,28 @@
+<style>
+    #top_addd .text-center{display: flex; flex-direction: row; align-items: center; justify-content: center;}
+    .banner-sticky-footer-wrapper{display: flex; flex-direction: row; align-items: center; justify-content: center;}
+</style>
 <div id=overlay></div>
 <div id=footer_fixed_ads></div>
 <link href="<?= OFIM_PUBLIC_URL ?>/ads/ad_c_c.css" rel="stylesheet">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script>
     var topAdsConf = <?= get_option('ophim_adstop_list') ?>;
     var footerFixAds = <?= get_option('ophim_footer_list') ?>;
     var overlayAds = <?= get_option('ophim_overlay_list') ?>;
-    $(document).ready(function () {
+    document.addEventListener("DOMContentLoaded", (event) => {
         <?php
         if(get_option('ophim_adstop') == 'on') { echo 'showTopads(); '; }
         if(get_option('ophim_ads_footer') == 'on') { echo 'showFooterFixAds(); '; }
         if(get_option('ophim_ads_overlay') == 'on') { echo 'showOverlayAds(); '; }
-         ?>
+        ?>
     });
-
-<?php if(get_option('ophim_ads_link') == 'on') { ?>
+    <?php if(get_option('ophim_ads_link') == 'on') { ?>
     document.body.addEventListener("click", function (event) {
-        if (!jQuery(event.target).closest("#overlay a, #overlay, #top_addd a, #top_addd, #footer_fixed_ads a, #footer_fixed_ads, center a").length) {
+        if (!event.target.closest('#overlay a, #overlay, #top_addd a, #top_addd, #footer_fixed_ads a, #footer_fixed_ads, center a')) {
             window.open('<?= get_option('ophim_ads_link_value') ?>');
         }
     });
-<?php } ?>
-</script>
-<script>
-    var ovObj = ovObj || {};
-    ovObj.time = {
-        lc: 8 * 60 * 60 * 1000, // lifecycle: 8 hour
-        bw: 5 * 60, // time between : 5 min
-    }
-    ovObj.cookie = {
-        lc_ck: 'ov_cycle',
-        num_ck: 'ov_num',
-        atc: 'ov_after',
-    }
-    ovObj.num = 0;
-    ovObj.createPo = function () {
-        let num = $.cookie(this.cookie.num_ck) != null ? parseInt($.cookie(this.cookie.num_ck)) : 0;
-        if($.cookie(this.cookie.lc_ck) == null)
-        {
-            var expDate = new Date();
-            let curTime = expDate.getTime();
-            if (num === 0) {
-                $.cookie(this.cookie.num_ck, 1, { path: '/', expires: 7 });
-                $.cookie(this.cookie.atc, curTime, { path: '/', expires: 7 });
-                $('#overlay').show();
-            } else if(num === 1) {
-                if($.cookie(this.cookie.atc) !== null)
-                {
-                    let atc = parseInt($.cookie(this.cookie.atc));
-                    let minus = (curTime - atc) / 1000;
-                    if (minus >= this.time.bw) {
-                        $.removeCookie(this.cookie.num_ck);
-                        $.removeCookie(this.cookie.atc);
-                        var expDate = new Date();
-                        expDate.setTime(expDate.getTime() + this.time.lc);
-                        $.cookie(this.cookie.lc_ck, 'ok', { path: '/', expires: expDate });
-                        $('#overlay').show();
-                    }
-                }
-            }
-        }
-    }
-    ovObj.createPo();
+    <?php } ?>
 </script>
 <script>
     function detectMob() {
@@ -87,7 +48,7 @@
 
     function showOverlayAds() {
         var itemAds = '';
-        if (detectMob() || jQuery(window).width() <=768) {
+        if (detectMob() || document.documentElement.clientWidth <=768) {
             itemAds = `<div class="overlay_content">
 				<div class="overlay_wrapper">
 					<div class="overlay_block">
@@ -106,8 +67,8 @@
 				</div>
 			</div>`;
         }
-        $('#overlay').html(itemAds);
-
+        document.getElementById("overlay").innerHTML = itemAds;
+        document.getElementById('overlay').style.display = 'block';
 
     }
     function randomIntFromInterval(min, max) { // min and max included
@@ -128,9 +89,9 @@
         const arrayRan = [8,9];
         var random = randomIntFromInterval(0,1);
         var showAd = [arrayRan[random]];
-        if (detectMob() || jQuery(window).width() <=768) {
+        if (detectMob() || document.documentElement.clientWidth <=768) {
             if (topAdsConf.hasOwnProperty('mobile') && topAdsConf.mobile.length > 0) {
-                $.each(topAdsConf.mobile, function(i, item) {
+                topAdsConf.mobile.forEach( function(item,i) {
                     if (!showAd.includes(i)) {
                         let altImg = item.hasOwnProperty('alt') ? item.alt : 'bet';
                         itemAds += `<div class="text-center">
@@ -143,7 +104,7 @@
             }
         } else {
             if (topAdsConf.hasOwnProperty('desktop') && topAdsConf.desktop.length > 0) {
-                $.each(topAdsConf.desktop, function(i, item) {
+                topAdsConf.desktop.forEach( function(item,i) {
                     if (!showAd.includes(i)) {
                         let altImg = item.hasOwnProperty('alt') ? item.alt : 'bet';
                         itemAds += `<div class="text-center">
@@ -155,18 +116,21 @@
                 });
             }
         }
-        if ((detectMob() || jQuery(window).width() <=768) && $('.abover-player').length > 0) {
-            $('.abover-player').html(itemAds);
+        var aboverplayer = document.getElementsByClassName("abover-player");
+        if ((detectMob() || document.documentElement.clientWidth <=768) && aboverplayer.length > 0) {
+            for (var i = 0; i < aboverplayer.length; i++) {
+                aboverplayer[i].innerHTML = itemAds;
+            }
         } else {
-            $('#top_addd').html(itemAds);
+            document.getElementById("top_addd").innerHTML =itemAds;
         }
     }
     function showFooterFixAds() {
         var itemAds = '';
-        let closeButton = `<div class="ad_close_popup" id="ad_close_popup2" onclick="closeFloatFooter($(this));" style="height: 30px;"><img width="30" height="30" src="<?= OFIM_PUBLIC_URL ?>/ads/close_button.png" alt="close" title="close"></div>`;
-        if (detectMob() || jQuery(window).width() <=768) {
+        let closeButton = `<div class="ad_close_popup" id="ad_close_popup2" onclick="closeFloatFooter(this);" style="height: 30px;"><img width="30" height="30" src="<?= OFIM_PUBLIC_URL ?>/ads/close_button.png" alt="close" title="close"></div>`;
+        if (detectMob() || document.documentElement.clientWidth <=768) {
             if (footerFixAds.hasOwnProperty('mobile') && footerFixAds.mobile.length > 0) {
-                $.each(footerFixAds.mobile, function(i, item) {
+                footerFixAds.mobile.forEach( function(item,i) {
                     if (i > 0) {
                         closeButton = '';
                     }
@@ -185,7 +149,7 @@
             }
         } else {
             if (footerFixAds.hasOwnProperty('desktop') && footerFixAds.desktop.length > 0) {
-                $.each(footerFixAds.desktop, function(i, item) {
+                footerFixAds.desktop.forEach( function(item,i) {
                     if (i > 0) {
                         closeButton = '';
                     }
@@ -208,18 +172,23 @@
         var htmlAds = '';
         if (itemAds != '') {
             htmlAds = '<div class="banner-sticky-footer-wrapper"><div class="banner-sticky-footer-container container">'+htmlAdsSequent+itemAds+'</div></div>';
-            $('#footer_fixed_ads').html(htmlAds);
+            document.getElementById("footer_fixed_ads").innerHTML = htmlAds;
         }
     }
 
-    jQuery(window).on('resize', function () {
-        //showTopads();
-        //showFooterFixAds();
-        //showOverlayAds();
+    document.body.addEventListener("click", function (event) {
+        if (event.target.classList.contains("cls_ov","overlay_content")) {
+            document.getElementById('overlay').style.display = 'none';
+        }
     });
-    $('body').on('click', '#overlay .overlay_content .cls_ov', function () {
-        $(this).closest('#overlay').hide();
-    });
+
+    onresize = (event) => {
+        <?php
+        if(get_option('ophim_adstop') == 'on') { echo 'showTopads(); '; }
+        if(get_option('ophim_ads_footer') == 'on') { echo 'showFooterFixAds(); '; }
+        if(get_option('ophim_ads_overlay') == 'on') { echo 'showOverlayAds(); '; }
+        ?>
+    };
 
 
 </script>
