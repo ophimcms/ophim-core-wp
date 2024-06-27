@@ -58,9 +58,9 @@ function crawl_ophim_movies_handle($url, $ophim_id, $ophim_update_time, $filterT
             'post_type' => 'ophim',
             'meta_query' => array(
                 array(
-                    'key' => 'ophim_fetch_info_url',
-                    'value' => $url,
-                    'compare' => 'LIKE',
+                    'key' => 'ophim_fetch_ophim_id',
+                    'value' => $ophim_id,
+                    'compare' => '=',
                 )
             )
         );
@@ -74,9 +74,9 @@ function crawl_ophim_movies_handle($url, $ophim_id, $ophim_update_time, $filterT
                 'post_type' => 'ophim',
                 'meta_query' => array(
                     array(
-                        'key' => 'ophim_fetch_info_url',
-                        'value' => $url,
-                        'compare' => 'LIKE',
+                        'key' => 'ophim_fetch_ophim_id',
+                        'value' => $ophim_id,
+                        'compare' => '=',
                     )
                 )
             );
