@@ -6,7 +6,9 @@ function new_rewrite_rule()
 }
 
 add_action('init', 'new_rewrite_rule');
-
+//classic widget and editer
+add_filter('use_block_editor_for_post', '__return_false');
+add_filter( 'use_widgets_block_editor', '__return_false' );
 //filter feature
 function wisdom_filter_tracked_plugins()
 {
