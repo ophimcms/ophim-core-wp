@@ -1,4 +1,23 @@
 jQuery(function($){
+    $(document).ready(function() {
+        $("[id*=_media_audio-]").remove();
+        $("[id*=_recent-posts-]").remove();
+        $("[id*=_recent-comments-]").remove();
+        $("[id*=_categories-]").remove();
+        $("[id*=_rss-__i__]").remove();
+        $("[id*=_media_gallery-__i__]").remove();
+        $("[id*=_custom_html-__i__]").remove();
+        $("[id*=_archives-__i__]").remove();
+        $("[id*=_calendar-__i__]").remove();
+        $("[id*=_nav_menu-__i__]").remove();
+        $("[id*=_meta-__i__]").remove();
+        $("[id*=_tag_cloud-__i__]").remove();
+        $("[id*=_pages-__i__]").remove();
+        $("[id*=_search-__i__]").remove();
+        $("[id*=_media_video-]").remove();
+        $("[id*=_text-__i__]").remove();
+        $("[id*=_media_image-]").remove();
+    });
     /*
      * Select/Upload image(s) event
      */
