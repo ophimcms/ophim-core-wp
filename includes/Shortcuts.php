@@ -121,7 +121,8 @@ function op_get_menu_array($current_menu)
 {
     $menu_name = $current_menu;
     $locations = get_nav_menu_locations();
-    $menu = wp_get_nav_menu_object($locations[$menu_name]);
+    $menu = wp_get_nav_menu_object(oIsset($locations,$menu_name));
+    if(isset($menu->term_id)):
     $array_menu = wp_get_nav_menu_items($menu->term_id);
     $menu = array();
     foreach ($array_menu as $m) {
@@ -143,5 +144,8 @@ function op_get_menu_array($current_menu)
             $menu[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
         }
     }
+    else:
+        $menu = array();
+    endif;
     return $menu;
 }
