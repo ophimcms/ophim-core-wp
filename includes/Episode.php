@@ -13,7 +13,23 @@ function watchUrl(){
 
 }
 function episodeList(){
-    return get_post_meta(get_the_id(), 'ophim_episode_list', true);
+    $episode_arr = [];
+    $episode= get_post_meta(get_the_id(), 'ophim_episode_list', true);
+    foreach ($episode as $sv => $list){
+        $episode_arr[$sv]['server_name'] = $list['server_name'];
+        foreach ($list['server_data'] as $l):
+            $episode_arr[$sv]['server_data'][] = array(
+                'svname' => $list['server_name'],
+                'svkey' => $sv,
+                'name' => $l['name'],
+                'slug' => $l['slug'],
+                'link_embed' => $l['link_embed'],
+                'link_m3u8' => $l['link_m3u8'],
+                'getUrl' => hrefEpisode($l["name"], $sv),
+            );
+        endforeach;
+    }
+    return $episode_arr;
 }
 function isEpisode(){
     global $wp;
@@ -49,12 +65,15 @@ function m3u8EpisodeUrl(){
 function embedEpisodeUrl(){
     return episodeUrl()['link_embed'];
 }
+function getEpisode(){
+    return episodeUrl()['episode'];
+}
 function episodeUrl(){
     global $wp;
     $current_url =$wp->request;
     $slugView = '/xem-phim/';
     $post_slug = basename(get_permalink(get_the_id()));;
-    $listphim = get_post_meta(get_the_id(), 'ophim_episode_list', true);
+    $listphim = episodeList();
     $checkUrl = explode("/", $current_url);
     $explode = explode("-sv-", $checkUrl[2]);
     $tap = str_replace('tap-','',$explode[0]);
@@ -72,6 +91,7 @@ function episodeUrl(){
         }
         if(isset($listphim[$sv]['server_data'][$keytap])){
             $data =  $listphim[$sv]['server_data'][$keytap];
+            $data['episode'] = $listphim[$sv]['server_data'][$keytap];
             $data['next'] = '';
             if(isset($listphim[$sv]['server_data'][$keytap+1])){
                 $next = home_url("/") . $slugView . $post_slug . '/tap-' . (slugify($listphim[$sv]['server_data'][$keytap+1]['name'])) . '-sv-' . $sv;
