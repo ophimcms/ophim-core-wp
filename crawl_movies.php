@@ -469,7 +469,7 @@ function getStatus($status)
             $hl_status = "completed";
             break;
         default:
-            $hl_status = "is_trailer";
+            $hl_status = "trailer";
             break;
     }
     return $hl_status;

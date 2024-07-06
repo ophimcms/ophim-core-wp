@@ -7,6 +7,9 @@ function watchUrl(){
     if (is_array($listphim)) {
         $tapdau = slugify(reset(reset($listphim)['server_data'])['name']);
          $episodeUrl = home_url("/") . $slugView . $post_slug . '/tap-' . $tapdau . '-sv-' . array_key_first($listphim);
+         if(!$tapdau){
+             return '';
+         }
          return $episodeUrl;
     }
     return '';
