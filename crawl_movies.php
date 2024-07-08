@@ -117,7 +117,8 @@ function crawl_ophim_movies_handle($url, $ophim_id, $ophim_update_time, $filterT
                 update_post_meta($post_id, 'ophim_runtime', $data['duration']);
                 update_post_meta($post_id, 'ophim_episode', $data['episode']);
                 update_post_meta($post_id, 'ophim_total_episode', $data['total_episode']);
-                update_post_meta($post_id, 'ophim_quality', $data['lang'] . ' - ' . $data['quality']);
+		update_post_meta($post_id, 'ophim_quality', $data['quality']);
+		update_post_meta($post_id, 'ophim_lang', $data['lang']);
                 update_post_meta($post_id, 'ophim_showtime_movies', $data['showtime']);
                 $updatepost = array(
                     'post_modified'  => date(),
