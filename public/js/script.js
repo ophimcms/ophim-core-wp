@@ -3,7 +3,7 @@ jQuery(function($){
         $("[id*=_media_audio-]").remove();
         $("[id*=_recent-posts-]").remove();
         $("[id*=_recent-comments-]").remove();
-        $("[id*=_categories-]").remove();
+        $("[id*=_categories-__i__]").remove();
         $("[id*=_rss-__i__]").remove();
         $("[id*=_media_gallery-__i__]").remove();
         $("[id*=_custom_html-__i__]").remove();
