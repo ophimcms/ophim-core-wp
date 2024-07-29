@@ -1,5 +1,28 @@
 <?php
 
+function fb_opengraph() {
+    global $post;
+    if(is_single()) {
+        if(has_post_thumbnail($post->ID)) {
+            $img_src = wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID ), 'medium');
+        } else {
+            $img_src = op_get_poster_url();
+        }
+        ?>
+        <meta property="og:title" content="<?php echo the_title(); ?>"/>
+        <meta property="og:description" content="<?php the_excerpt() ?>"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:url" content="<?php the_permalink() ?>"/>
+        <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+        <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
+        <?php
+    } else {
+        return;
+    }
+}
+add_action('wp_head', 'fb_opengraph', 5);
+
 function new_rewrite_rule()
 {
     add_rewrite_rule('xem-phim/([^/]*)/([^/]*)', 'index.php?ophim=$matches[1]', 'top');
