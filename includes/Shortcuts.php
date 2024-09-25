@@ -79,6 +79,9 @@ function config_css()
 {
     echo get_option('ophim_include_js_tag_head');
     echo "\n<style type='text/css'>\n";
+    echo '#player-wrapper{
+            height: 27vh!important;
+        }';
     echo get_option('ophim_include_css');
     echo "</style>\n";
 
