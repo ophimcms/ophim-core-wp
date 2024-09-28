@@ -110,7 +110,26 @@ function add_server_phim()
 add_action('wp_ajax_search_film' , 'search_film');
 add_action('wp_ajax_nopriv_search_film','search_film');
 function search_film(){
-    $the_query = new WP_Query( array( 'posts_per_page' => $_POST['limit'], 's' => esc_attr( $_POST['keyword'] ), 'post_type' => 'ophim' ) );
+    //$the_query = new WP_Query( array( 'posts_per_page' => $_POST['limit'], 's' => esc_attr( $_POST['keyword'] ), 'post_type' => 'ophim' ) );
+    $meta_query = array();
+    $args = array();
+    $search_string =  $_POST['keyword'];
+
+    $meta_query[] = array(
+        'key' => 'ophim_original_title',
+        'value' => $search_string,
+        'compare' => 'LIKE'
+    );
+    if(count($meta_query) > 1) {
+        $meta_query['relation'] = 'OR';
+    }
+    $args['post_type'] = "ophim";
+    $args['_meta_or_title'] = $search_string; //not using 's' anymore
+    $args['meta_query'] = $meta_query;
+    $args['posts_per_page'] = $_POST['limit'];
+
+    $the_query = new WP_Query($args);
+
     if( $the_query->have_posts() ) :
         while( $the_query->have_posts() ): $the_query->the_post();
 
@@ -131,3 +150,26 @@ function search_film(){
     echo json_encode( $post );
     die();
 }
+add_action( 'pre_get_posts', function( $q )
+{
+    if( $title = $q->get( '_meta_or_title' ) )
+    {
+        add_filter( 'get_meta_sql', function( $sql ) use ( $title )
+        {
+            global $wpdb;
+
+            // Only run once:
+            static $nr = 0;
+            if( 0 != $nr++ ) return $sql;
+
+            // Modified WHERE
+            $sql['where'] = sprintf(
+                " AND ( %s OR %s ) ",
+                $wpdb->prepare( "{$wpdb->posts}.post_title like '%%%s%%'", $title),
+                mb_substr( $sql['where'], 5, mb_strlen( $sql['where'] ) )
+            );
+
+            return $sql;
+        });
+    }
+});
