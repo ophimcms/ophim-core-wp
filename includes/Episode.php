@@ -1,7 +1,14 @@
 <?php
 
 function watchUrl(){
-    $slugView = '/xem-phim/';
+    $getslug = get_option('ophim_watch_urls');
+    if($getslug){
+        $slug = $getslug;
+    }else{
+        $slug = 'xem-phim';
+    }
+
+    $slugView = '/'.$slug.'/';
     $post_slug = basename(get_permalink(get_the_id()));;
     $listphim = get_post_meta(get_the_id(), 'ophim_episode_list', true);
     if (is_array($listphim)) {
@@ -35,8 +42,14 @@ function episodeList(){
     return $episode_arr;
 }
 function isEpisode(){
+    $getslug = get_option('ophim_watch_urls');
+    if($getslug){
+        $slug = $getslug;
+    }else{
+        $slug = 'xem-phim';
+    }
     global $wp;
-    if (str_contains($wp->request, 'xem-phim') && episodeUrl($wp->request)) {
+    if (str_contains($wp->request, $slug) && episodeUrl($wp->request)) {
         return true;
     }
     return false;
@@ -57,7 +70,13 @@ function getCurrentUrl(){
     return get_permalink();
 }
 function hrefEpisode($episode,$sv){
-    return home_url("xem-phim/" . basename(get_permalink(get_the_id()))) . '/tap-'. slugify($episode) . '-sv-' . $sv ;
+    $getslug = get_option('ophim_watch_urls');
+    if($getslug){
+        $slug = $getslug;
+    }else{
+        $slug = 'xem-phim';
+    }
+    return home_url($slug."/" . basename(get_permalink(get_the_id()))) . '/tap-'. slugify($episode) . '-sv-' . $sv ;
 }
 function nextEpisodeUrl(){
     return episodeUrl()['next'];

@@ -25,7 +25,13 @@ add_action('wp_head', 'fb_opengraph', 5);
 
 function new_rewrite_rule()
 {
-    add_rewrite_rule('xem-phim/([^/]*)/([^/]*)', 'index.php?ophim=$matches[1]', 'top');
+    $getslug = get_option('ophim_watch_urls');
+    if($getslug){
+        $slug = $getslug;
+    }else{
+        $slug = 'xem-phim';
+    }
+    add_rewrite_rule($slug.'/([^/]*)/([^/]*)', 'index.php?ophim=$matches[1]', 'top');
 }
 
 add_action('init', 'new_rewrite_rule');

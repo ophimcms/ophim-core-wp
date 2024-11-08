@@ -26,6 +26,7 @@ class oFim_Permalink
         $this->addField('ophim_slug_regions', array( $this, 'ophim_regions'), 'Regions' );
         $this->addField('ophim_slug_tags', array( $this, 'ophim_tags'), 'Tags' );
         $this->addField('ophim_slug_years', array( $this, 'ophim_years'), 'Years' );
+        $this->addField('ophim_slug_details', array( $this, 'ophim_watch_urls'), 'Details Movies' );
     }
 
     /* Callbacks
@@ -59,6 +60,9 @@ class oFim_Permalink
     public function ophim_years() {
         echo $this->input('ophim_slug_years', 'years', '/nam/');
     }
+    public function ophim_watch_urls() {
+        echo $this->input('ophim_watch_urls', 'xem-phim', '/quan-tro-nhu-y/');
+    }
 
 
     public function settingsSave() {
@@ -71,6 +75,7 @@ class oFim_Permalink
         $this->saveField('ophim_slug_tags');
         $this->saveField('ophim_slug_years');
         $this->saveField('ophim_slug_regions');
+        $this->saveField('ophim_watch_urls');
     }
 
 
