@@ -26,7 +26,7 @@ class oFim_Permalink
         $this->addField('ophim_slug_regions', array( $this, 'ophim_regions'), 'Regions' );
         $this->addField('ophim_slug_tags', array( $this, 'ophim_tags'), 'Tags' );
         $this->addField('ophim_slug_years', array( $this, 'ophim_years'), 'Years' );
-        $this->addField('ophim_slug_details', array( $this, 'ophim_watch_urls'), 'Details Movies' );
+        $this->addField('ophim_slug_details', array( $this, 'ophim_watch_urls'), 'Play Movie Page' );
     }
 
     /* Callbacks
