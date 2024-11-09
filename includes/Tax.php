@@ -22,6 +22,14 @@ function fb_opengraph() {
     }
 }
 add_action('wp_head', 'fb_opengraph', 5);
+add_filter( 'document_title', 'mod_browser_tab_title');
+function mod_browser_tab_title( $title )
+{
+    if(episodeName()){
+        $title = $title.' - Tập '.episodeName();
+    }
+    return $title;
+}
 
 function new_rewrite_rule()
 {
