@@ -15,7 +15,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
 
         switch ($tab) :
             case 'schedule':
-                $crawl_ophim_settings = json_decode(get_option(CRAWL_OPHIM_OPTION_SETTINGS, []));
+                $crawl_ophim_settings = json_decode(get_option(CRAWL_OPHIM_OPTION_SETTINGS, '[]'));
                 ?>
 
                 <div class="crawl_page">
@@ -74,21 +74,21 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
                             </div>
                             <div>
                                 <p>Bỏ qua định dạng: <code
-                                            style="color: red"><?php echo join(', ', $crawl_ophim_settings->filterType); ?></code>
+                                            style="color: red"><?php echo join(', ', $crawl_ophim_settings->filterType ?? []); ?></code>
                                 </p>
                                 <p>Bỏ qua thể loại: <code
-                                            style="color: red"><?php echo join(', ', $crawl_ophim_settings->filterCategory); ?></code>
+                                            style="color: red"><?php echo join(', ', $crawl_ophim_settings->filterCategory ?? []); ?></code>
                                 </p>
                                 <p>Bỏ qua quốc gia: <code
-                                            style="color: red"><?php echo join(', ', $crawl_ophim_settings->filterCountry); ?></code>
+                                            style="color: red"><?php echo join(', ', $crawl_ophim_settings->filterCountry ?? []); ?></code>
                                 </p>
                             </div>
                             <div>
                                 <p>Page đầu: <code
-                                            style="color: blue"><?php echo $crawl_ophim_settings->pageFrom; ?></code>
+                                            style="color: blue"><?php echo $crawl_ophim_settings->pageFrom ?? "N/A"; ?></code>
                                 </p>
                                 <p>Page cuối: <code
-                                            style="color: blue"><?php echo $crawl_ophim_settings->pageTo; ?></code></p>
+                                            style="color: blue"><?php echo $crawl_ophim_settings->pageTo ?? "N/A"; ?></code></p>
                             </div>
 
                             <div class="notice notice-success">

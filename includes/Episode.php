@@ -57,8 +57,10 @@ function isEpisode(){
 function episodeName(){
     global $wp;
     $checkUrl = explode("/", $wp->request);
-    $explode = explode("-sv-", $checkUrl[2]);
-    return str_replace('tap-', '', $explode[0]);
+    if(count($checkUrl) > 2) {
+        $explode = explode("-sv-", $checkUrl[2]);
+        return str_replace('tap-', '', $explode[0]);
+    }
 }
 function episodeSV(){
     global $wp;
@@ -237,7 +239,8 @@ function op_get_actors($limit = 10,$end ='')
 }
 function op_get_actor()
 {
-    return get_the_terms(get_the_ID(), "ophim_actors");
+    $actors = get_the_terms(get_the_ID(), "ophim_actors");
+    return $actors ? $actors : [];
 }
 function op_get_directors($limit = 10,$end ='')
 {
